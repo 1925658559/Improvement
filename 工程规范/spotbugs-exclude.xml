@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    SpotBugs 排除规则配置
+    说明：学习阶段可以适当放宽，Day 21+ 工程阶段严格执行
+    更新：发现误报时在此添加规则，并在注释中说明原因
+-->
+<FindBugsFilter>
+
+    <!-- ================================================== -->
+    <!-- 学习阶段豁免 (Day 1-20) -->
+    <!-- ================================================== -->
+
+    <!--
+        示例：教学代码中故意忽略返回值用于演示
+        原因：教育用途，非生产代码
+        移除时机：Day 21 之后
+    -->
+    <!--
+    <Match>
+        <Bug pattern="RV_RETURN_VALUE_IGNORED"/>
+    </Match>
+    -->
+
+    <!-- ================================================== -->
+    <!-- 误报排除 (False Positives) -->
+    <!-- ================================================== -->
+
+    <!--
+        SLF4J 日志参数检查误报
+        原因：某些 {} 占位符在动态日志中被 SpotBugs 误判
+    -->
+    <Match>
+        <Class name="~.*\.Logger.*"/>
+        <Bug pattern="SLF4J_PLACE_HOLDER_MISMATCH"/>
+    </Match>
+
+    <!--
+        单元测试中的序列化警告
+        原因：测试类不需要实现 Serializable
+    -->
+    <Match>
+        <Class name="~.*Test.*"/>
+        <Bug pattern="SE_NO_SERIALVERSIONID"/>
+    </Match>
+
+    <!-- ================================================== -->
+    <!-- 项目特定排除 -->
+    <!-- ================================================== -->
+
+    <!--
+        Netty ByteBuf 直接操作内存
+        原因：Netty 零拷贝特性，无需检查
+    -->
+    <Match>
+        <Class name="~.*\.netty\..*"/>
+        <Bug pattern="EI_EXPOSE_REP"/>
+    </Match>
+
+    <!--
+        Protobuf 生成的代码
+        原因：自动生成，无需人工审查
+    -->
+    <Match>
+        <Class name="~.*\.protobuf\..*"/>
+    </Match>
+
+    <!-- ================================================== -->
+    <!-- 待定问题 (需人工审查) -->
+    <!-- ================================================== -->
+
+    <!--
+        添加新规则时请保留注释说明：
+        <Match>
+            <Class name="com.example.ClassName"/>
+            <Method name="methodName"/>
+            <Bug pattern="BUG_PATTERN"/>
+            <Justification>
+                这里说明为什么排除此警告
+            </Justification>
+        </Match>
+    -->
+
+</FindBugsFilter>
