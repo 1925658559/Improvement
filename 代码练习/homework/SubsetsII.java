@@ -17,10 +17,11 @@ public class SubsetsII {
         List<Integer> path = new ArrayList<>();
 
         // TODO 1: 先对数组排序（为什么需要排序？）
-
+        // 排序后，相同的元素会相邻，方便去重
+        Arrays.sort(nums);
 
         // TODO 2: 从索引 0 开始回溯
-
+        backtrack(nums, 0, path, result);
 
         return result;
     }
@@ -28,22 +29,25 @@ public class SubsetsII {
     private void backtrack(int[] nums, int start,
                           List<Integer> path, List<List<Integer>> result) {
         // TODO 3: 把当前 path 加入结果集
-
+        // 每个节点都是一个有效的子集，必须创建副本
+        result.add(new ArrayList<>(path));
 
         // TODO 4: 遍历：从 start 开始
         for (int i = start; i < nums.length; i++) {
             // TODO 5: 去重逻辑（关键！）
             // 如果当前元素和前一个元素相同，且不是当前层的第一个选择，就跳过
-
+            if (i > start && nums[i] == nums[i - 1]) {
+                continue; // 跳过重复元素
+            }
 
             // TODO 6: 做选择
-
+            path.add(nums[i]);
 
             // TODO 7: 递归
-
+            backtrack(nums, i + 1, path, result);
 
             // TODO 8: 撤销选择（回溯）
-
+            path.remove(path.size() - 1);
         }
     }
 

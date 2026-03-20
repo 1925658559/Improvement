@@ -50,3 +50,27 @@ public class Subsets {
             path.remove(path.size() - 1);
         }
     }
+
+    /**
+     * 测试方法
+     */
+    public static void main(String[] args) {
+        Subsets solution = new Subsets();
+
+        // 测试用例 1
+        int[] nums1 = {1, 2, 3};
+        List<List<Integer>> result1 = solution.subsets(nums1);
+        System.out.println("输入: [1,2,3]");
+        System.out.println("输出: " + result1);
+        System.out.println("子集数量: " + result1.size() + " (期望: 8)");
+
+        System.out.println();
+
+        // 测试用例 2
+        int[] nums2 = {0};
+        List<List<Integer>> result2 = solution.subsets(nums2);
+        System.out.println("输入: [0]");
+        System.out.println("输出: " + result2);
+        System.out.println("子集数量: " + result2.size() + " (期望: 2)");
+    }
+}
