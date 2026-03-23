@@ -12,7 +12,8 @@
       "Bash(cd \"E:\\\\cc_program\\\\Improvement\\\\代码练习\\\\homework\" && javac SubsetsII.java && java SubsetsII)",
       "Bash(java Subsets)",
       "Bash(java Combinations)",
-      "Bash(\"E:\\\\cc_program\\\\Improvement\\\\每日特训\\\\Day-14.md\")"
+      "Bash(\"E:\\\\cc_program\\\\Improvement\\\\每日特训\\\\Day-14.md\")",
+      "Bash(java NumberOfIslands)"
     ]
   }
 }
